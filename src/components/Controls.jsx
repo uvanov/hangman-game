@@ -13,7 +13,7 @@ export const Controls = () => {
 
   const [inputValue, setInputValue] = useState('');
 
-  const handleChange = event => setInputValue(event.target.value);
+  const changeHandler = event => setInputValue(event.target.value);
 
   return (
     <Stack
@@ -24,7 +24,7 @@ export const Controls = () => {
     >
       <Input
         value={inputValue}
-        onChange={handleChange}
+        onChange={changeHandler}
         placeholder='Word'
         size='lg'
         bg='white'
