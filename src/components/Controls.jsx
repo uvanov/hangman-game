@@ -17,7 +17,7 @@ export const Controls = () => {
 
   return (
     <Stack
-      alignSelf='flex-end'
+      justifySelf='flex-end'
       direction='row'
       spacing='10px'
       w='50%'
@@ -36,6 +36,6 @@ export const Controls = () => {
       >
         Submit
       </Button>
-    </Stack>
+    </Stack >
   );
 }

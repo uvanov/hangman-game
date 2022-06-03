@@ -4,14 +4,12 @@ import styled from '@emotion/styled';
 
 // Local modules
 import { Controls } from './components/Controls';
+import { Word } from './components/Word';
 
 // UI
 import {
   Flex,
   Center,
-  Input,
-  Button,
-  Stack
 } from '@chakra-ui/react';
 
 // Exports
@@ -19,7 +17,8 @@ export const App = () => {
   return (
     <Center h='100%'>
       <Flex
-        justifyContent='center'
+        direction='column'
+        justifyContent='space-between'
         alignItems='center'
         w='60%'
         h='80%'
@@ -28,6 +27,8 @@ export const App = () => {
         borderRadius='20px'
         pb={10}
       >
+        <div />
+        <Word />
         <Controls />
       </Flex>
     </Center>
