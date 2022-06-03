@@ -2,6 +2,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+// Local modules
+import { Controls } from './components/Controls';
+
 // UI
 import {
   Flex,
@@ -25,25 +28,7 @@ export const App = () => {
         borderRadius='20px'
         pb={10}
       >
-        <Stack
-          alignSelf='flex-end'
-          direction='row'
-          spacing='10px'
-          w='50%'
-        >
-          <Input
-            placeholder='Word'
-            size='lg'
-            bg='white'
-            boxShadow='lg'
-          />
-          <Button
-            colorScheme='teal'
-            size='lg'
-          >
-            Submit
-          </Button>
-        </Stack>
+        <Controls />
       </Flex>
     </Center>
   );
