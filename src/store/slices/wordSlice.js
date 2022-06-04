@@ -1,11 +1,11 @@
 // Import modules
 import { createSlice } from "@reduxjs/toolkit";
+import { getRandomFromArray, getRandomNumberFromRange } from "../../utils/utils";
 
 // Initial state
 const initialState = {
-  words: ['Food', 'Water', 'Example'],
+  words: ['Food', 'Water', 'Example', 'Mom', 'Keyboard', 'Magic'],
   currentWord: '',
-  spoileredCurrentWord: ''
 };
 
 // Create Slice
@@ -14,8 +14,8 @@ export const wordSlice = createSlice({
   initialState,
   reducers: {
     changeCurrentWord(state) {
-      const random = Math.floor(Math.random() * state.words.length);
-      state.currentWord = state.words[random];
+      const randomWord = getRandomFromArray(state.words)
+      state.currentWord = randomWord;
     }
   }
 });
