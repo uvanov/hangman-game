@@ -1,5 +1,5 @@
 // Import modules
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // Local modules
@@ -25,14 +25,32 @@ export const Controls = () => {
   const changeHandler = event => setInputValue(event.target.value);
 
   const sumbitHandler = () => {
+
     if (currentWord.toLowerCase() === inputValue.trim().toLowerCase()) {
       setIsWordValid(true);
       dispatch(changeCurrentWord());
+      console.log('Submit Handler Valid', { current: currentWord, input: inputValue });
     } else {
+      console.log('invalid');
       setIsWordValid(false);
       setTimeout(() => setIsWordValid(true), 3000)
+      console.log('Submit Handler Invalid', { current: currentWord, input: inputValue });
     }
   };
+
+  const keyDownHandler = useCallback(event => {
+    if (event.key === 'Enter') {
+      sumbitHandler();
+    }
+  });
+
+  useEffect(() => {
+    window.addEventListener('keydown', keyDownHandler);
+
+    return () => {
+      window.removeEventListener('keydown', keyDownHandler);
+    }
+  }, [currentWord, inputValue]);
 
   return (
     <Stack
