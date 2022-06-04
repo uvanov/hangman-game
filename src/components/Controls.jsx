@@ -42,7 +42,7 @@ export const Controls = () => {
     if (event.key === 'Enter') {
       sumbitHandler();
     }
-  });
+  }, []);
 
   useEffect(() => {
     window.addEventListener('keydown', keyDownHandler);
