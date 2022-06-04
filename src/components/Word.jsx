@@ -29,6 +29,7 @@ export const Word = () => {
     <Text
       fontSize='6xl'
       fontWeight='bold'
+      letterSpacing={5}
     >
       {/* {currentWord} */}
       {spoilererdWord}
