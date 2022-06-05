@@ -12,6 +12,9 @@ import {
   Stack
 } from '@chakra-ui/react';
 
+// Constants
+const GUESS_ERROR_EVENT = new CustomEvent('guess-error');
+
 // Exports
 export const Controls = () => {
 
@@ -20,29 +23,26 @@ export const Controls = () => {
 
   const currentWord = useSelector(state => state.word.currentWord);
   const [inputValue, setInputValue] = useState('');
-  const [isWordValid, setIsWordValid] = useState(true);
 
   const changeHandler = event => setInputValue(event.target.value);
 
-  const sumbitHandler = () => {
-
+  const submitHandler = () => {
+    // console.log('Submit Handler');
     if (currentWord.toLowerCase() === inputValue.trim().toLowerCase()) {
-      setIsWordValid(true);
       dispatch(changeCurrentWord());
+      setInputValue('')
       console.log('Submit Handler Valid', { current: currentWord, input: inputValue });
     } else {
-      console.log('invalid');
-      setIsWordValid(false);
-      setTimeout(() => setIsWordValid(true), 3000)
+      window.dispatchEvent(GUESS_ERROR_EVENT);
       console.log('Submit Handler Invalid', { current: currentWord, input: inputValue });
     }
   };
 
   const keyDownHandler = useCallback(event => {
     if (event.key === 'Enter') {
-      sumbitHandler();
+      submitHandler();
     }
-  }, []);
+  }, [currentWord, inputValue]);
 
   useEffect(() => {
     window.addEventListener('keydown', keyDownHandler);
@@ -50,7 +50,7 @@ export const Controls = () => {
     return () => {
       window.removeEventListener('keydown', keyDownHandler);
     }
-  }, [currentWord, inputValue]);
+  }, [keyDownHandler]);
 
   return (
     <Stack
@@ -62,7 +62,6 @@ export const Controls = () => {
       <Input
         value={inputValue}
         onChange={changeHandler}
-        isInvalid={!isWordValid}
         placeholder='Word'
         size='lg'
         bg='white'
@@ -71,7 +70,7 @@ export const Controls = () => {
       <Button
         colorScheme='teal'
         size='lg'
-        onClick={sumbitHandler}
+        onClick={submitHandler}
       >
         Submit
       </Button>

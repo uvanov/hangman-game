@@ -1,5 +1,5 @@
 // Import modules
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import {
   useSelector,
   useDispatch
@@ -17,7 +17,7 @@ export const Word = () => {
 
   const dispatch = useDispatch();
   const currentWord = useSelector(state => state.word.currentWord)
-  const spoilererdWord = addSpoilersToWord(currentWord);
+  const spoilererdWord = useMemo(() => addSpoilersToWord(currentWord), [currentWord]);
 
   const { changeCurrentWord } = wordSlice.actions;
 
